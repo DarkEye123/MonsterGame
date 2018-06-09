@@ -74,14 +74,14 @@ new Vue({
 
         action: function(a) {
             let msg = this.player[a](this.monster)
-            this.logMessages.push({"msg":msg, "entity":this.player})
+            this.logMessages.unshift({"msg":msg, "entity":this.player})
 
             if (this.monster.isDead()) {
                 return this.endGame(this.player.name)
             }
 
             msg = this.monster.attack(this.player)
-            this.logMessages.push({"msg":msg, "entity":this.monster})
+            this.logMessages.unshift({"msg":msg, "entity":this.monster})
 
             if (this.player.isDead()) {
                 return this.endGame(this.monster.name)
