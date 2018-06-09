@@ -40,7 +40,7 @@
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="logMessages.length > 0">
         <div class="small-12 columns">
             <ul>
                 <li v-for="log in logMessages" :class="{ 'player-turn': !log.entity.isMonster, 'monster-turn': log.entity.isMonster }">
