@@ -50,7 +50,7 @@
                 <ul>
                     <transition-group appear appear-active-class="animated fadeIn" enter-active-class="animated bounceIn" move-class="move-transition">
                         <li v-for="log in logMessages" :key="log.index" :class="{ 'player-turn': !log.entity.isMonster, 'monster-turn': log.entity.isMonster }">
-                            {{ log.msg }} {{log.index}}
+                            {{ log.msg }}
                         </li>
                     </transition-group>
                 </ul>
