@@ -78,10 +78,13 @@ new Vue({
                 return this.endGame(this.player.name)
             }
 
-            this.executeMonsterAction();
-            if (this.player.isDead()) {
-                return this.endGame(this.monster.name);
-            }
+            setTimeout(() => {
+                this.executeMonsterAction();
+                if (this.player.isDead()) {
+                    return this.endGame(this.monster.name);
+                }
+            }, 1000);
+
         },
         executePlayerAction(action) {
             let msg = this.player[action](this.monster);
