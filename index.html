@@ -5,7 +5,10 @@
     <title>Monster Slayer</title>
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/app.css">
-    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
 </head>
 
@@ -45,9 +48,11 @@
         <section class="row log" v-if="logMessages.length > 0">
             <div class="small-12 columns">
                 <ul>
-                    <li v-for="log in logMessages" :class="{ 'player-turn': !log.entity.isMonster, 'monster-turn': log.entity.isMonster }">
-                        {{ log.msg }}
-                    </li>
+                    <transition-group appear appear-active-class="animated fadeIn" enter-active-class="animated bounceIn" move-class="move-transition">
+                        <li v-for="log in logMessages" :key="log.index" :class="{ 'player-turn': !log.entity.isMonster, 'monster-turn': log.entity.isMonster }">
+                            {{ log.msg }} {{log.index}}
+                        </li>
+                    </transition-group>
                 </ul>
             </div>
         </section>

@@ -1,0 +1,10 @@
+.move-transition {
+    transition: transform 0.5s;
+}
+
+.absolute {
+    position: absolute;
+    /* see https://stackoverflow.com/questions/28144233/bootstrap-container-with-positionabsolute-loses-layout-inside#28145495 */
+    right: 0;
+    left: 0;
+}

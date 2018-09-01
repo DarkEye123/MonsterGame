@@ -72,26 +72,32 @@ new Vue({
             this.logMessages = [];
         },
 
-        action: function(a) {
-            let msg = this.player[a](this.monster)
-            this.logMessages.unshift({
-                "msg": msg,
-                "entity": this.player
-            })
-
+        action: function(action) {
+            this.executePlayerAction(action);
             if (this.monster.isDead()) {
                 return this.endGame(this.player.name)
             }
 
-            msg = this.monster.attack(this.player)
+            this.executeMonsterAction();
+            if (this.player.isDead()) {
+                return this.endGame(this.monster.name);
+            }
+        },
+        executePlayerAction(action) {
+            let msg = this.player[action](this.monster);
             this.logMessages.unshift({
                 "msg": msg,
-                "entity": this.monster
+                "entity": this.player,
+                "index": _.uniqueId()
+            });
+        },
+        executeMonsterAction() {
+            let msg = this.monster.attack(this.player)
+            this.logMessages.unshift({
+                "msg": msg,
+                "entity": this.monster,
+                "index": _.uniqueId()
             })
-
-            if (this.player.isDead()) {
-                return this.endGame(this.monster.name)
-            }
         },
         attack: function() {
             this.action("attack")
@@ -109,6 +115,5 @@ new Vue({
         giveUp: function() {
             this.endGame(this.monster.name)
         }
-
     }
 });
