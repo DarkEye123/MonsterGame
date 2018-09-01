@@ -10,25 +10,25 @@ class Entity {
         this.health = health
         this.currentHealth = health
         this.baseDamage = baseDamage
-        this.minDamage = Math.max(Math.floor(baseDamage/10), 3) // 10th of base or 3
-        this.bonusDamage = baseDamage + Math.max(Math.floor(baseDamage/3), 15)
+        this.minDamage = Math.max(Math.floor(baseDamage / 10), 3) // 10th of base or 3
+        this.bonusDamage = baseDamage + Math.max(Math.floor(baseDamage / 3), 15)
         this.isMonster = isMonster
     }
     attack(enemy) {
         let dmg = generateBetween(this.minDamage, this.baseDamage)
         enemy.currentHealth -= dmg
-        let message = this.name+ " is using attack: "+ dmg + " on: " + enemy.name
+        let message = this.name + " is using attack: " + dmg + " on: " + enemy.name
         return message
     }
     specialAttack(enemy) {
         let dmg = generateBetween(this.baseDamage, this.bonusDamage)
         enemy.currentHealth -= dmg
-        let message = this.name+ " is using specialAttack: "+ dmg + " on: " + enemy.name
+        let message = this.name + " is using specialAttack: " + dmg + " on: " + enemy.name
         return message
     }
     heal() {
-        let heal = generateBetween(10, this.health/5)
-        let message = this.name+ " is using heal: "+ heal
+        let heal = generateBetween(10, this.health / 5)
+        let message = this.name + " is using heal: " + heal
         console.log(message)
         this.currentHealth += heal
         if (this.currentHealth > this.health) {
@@ -74,14 +74,20 @@ new Vue({
 
         action: function(a) {
             let msg = this.player[a](this.monster)
-            this.logMessages.unshift({"msg":msg, "entity":this.player})
+            this.logMessages.unshift({
+                "msg": msg,
+                "entity": this.player
+            })
 
             if (this.monster.isDead()) {
                 return this.endGame(this.player.name)
             }
 
             msg = this.monster.attack(this.player)
-            this.logMessages.unshift({"msg":msg, "entity":this.monster})
+            this.logMessages.unshift({
+                "msg": msg,
+                "entity": this.monster
+            })
 
             if (this.player.isDead()) {
                 return this.endGame(this.monster.name)
